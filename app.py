@@ -174,7 +174,8 @@ def obter_professor_por_id(id_professor):
 
 
 # Start do servidor
-app.run(port=5000, host='localhost', debug=True)
+
 
 if __name__ == "__main__":
     inicializar_db
+    app.run(port=5000, host='localhost', debug=True)
