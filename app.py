@@ -1,5 +1,3 @@
-#from crypt import methods
-#from crypt import methods
 from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 
@@ -43,10 +41,13 @@ def inicializar_db():
 
 # Objetivo da API
 # Cadastrar ALuno + notas, listar todos os alunos, suas notas e resultado
+@app.route('/')
+def main():
+    return jsonify(f'Tela inicial')
 
 
 # Listar alunos
-# http://localhost:5000/alunos
+# http://localhost:6000/alunos
 @app.route('/alunos')
 def obter_alunos():
     # Extraindo dados da tabela
@@ -69,7 +70,7 @@ def obter_alunos():
 
 
 # URI de cadastro de alunos
-# http://localhost:5000/cadastraraluno
+# http://localhost:6000/cadastraraluno
 @app.route('/cadastraraluno', methods=['POST'])
 def novo_aluno():
     novo_aluno = request.get_json()
@@ -83,7 +84,7 @@ def novo_aluno():
 
 
 # Buscar aluno por ID
-# http://localhost:5000/aluno/ID
+# http://localhost:6000/aluno/ID
 @app.route('/alunos/<int:id_aluno>', methods=['GET'])
 def obter_aluno_por_id(id_aluno):
     aluno = Aluno.query.filter_by(id_aluno=id_aluno).first()
@@ -103,7 +104,7 @@ def obter_aluno_por_id(id_aluno):
 
 
 # Cunsulta de notas por ID do Aluno
-# http://localhost:5000/notas/ID
+# http://localhost:6000/notas/ID
 @app.route('/notas/<int:id_aluno>', methods=['GET'])
 def obter_nota_por_id(id_aluno):
     aluno = Aluno.query.filter_by(id_aluno=id_aluno).first()
@@ -126,7 +127,7 @@ def obter_nota_por_id(id_aluno):
 # Cadastrar professor, Ver professores cadastrados
 
 # Listar professores
-# http://localhost:5000/professores
+# http://localhost:6000/professores
 @app.route('/professores')
 def obter_professores():
     # Extraindo dados da tabela
@@ -143,7 +144,7 @@ def obter_professores():
 
 
 # URI de cadastro de professores
-# http://localhost:5000/cadastrarprofessor
+# http://localhost:6000/cadastrarprofessor
 
 @app.route('/cadastrarprofessor', methods=['POST'])
 def novo_professor():
@@ -158,7 +159,7 @@ def novo_professor():
 
 
 # Buscar professor por ID
-# http://localhost:5000/professor/ID
+# http://localhost:6000/professor/ID
 
 @app.route('/professores/<int:id_professor>', methods=['GET'])
 def obter_professor_por_id(id_professor):
@@ -174,8 +175,6 @@ def obter_professor_por_id(id_professor):
 
 
 # Start do servidor
-
-
 if __name__ == "__main__":
     inicializar_db
-    app.run(port=5000, host='localhost', debug=True)
+    app.run(port=6000, host='0.0.0.0', debug=True)
